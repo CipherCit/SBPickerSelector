@@ -243,7 +243,17 @@ extension SBPickerSwiftSelector: UIPickerViewDataSource, UIPickerViewDelegate {
 extension SBPickerSwiftSelector {
     
     public convenience init(mode: Mode, data: [Any]? = nil, startDate: Date? = nil, endDate: Date? = nil, defaultDate: Date? = nil) {
-        self.init(nibName: "SBPickerSwiftSelector", bundle: Bundle(for: SBPickerSwiftSelector.self))
+        let bundleNames = ["SBPickerSelector"]
+        bundleNames.forEach { (bundleName) in
+            guard
+                let bundleURL = Bundle.main.url(forResource: bundleName, withExtension: "bundle"),
+                let bundle = Bundle(url: bundleURL) else {
+                preconditionFailure()
+            }
+            bundle.load()
+        }
+        
+        self.init(nibName: "SBPickerSwiftSelector", bundle: Bundle(identifier: "SBPickerSelector"))
         
         self.modalPresentationStyle = .overCurrentContext
         self.pickerMode = mode
