@@ -10,6 +10,6 @@ let package = Package(
             targets: ["SBPickerSelector"]),
     ],
     targets: [
-        .target(name: "SBPickerSelector", path:"SBPickerSwiftSelector")
+        .target(name: "SBPickerSelector", path: "SBPickerSwiftSelector", [.process("Resources")])
     ]
 )
