@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SBPickerSwiftSelector" customModule="SBPickerSelector">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SBPickerSwiftSelector" customModule="SBPickerSelector_SBPickerSelector">
             <connections>
                 <outlet property="cancelButton" destination="UYc-rG-hYr" id="Uva-de-5PF"/>
                 <outlet property="datePickerView" destination="Bal-Z8-2NG" id="7rN-UK-zuf"/>
