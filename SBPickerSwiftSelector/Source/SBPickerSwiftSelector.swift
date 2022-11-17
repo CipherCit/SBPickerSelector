@@ -35,6 +35,9 @@ public class SBPickerSwiftSelector: UIViewController {
     fileprivate var endDate: Date?
     fileprivate var defaultDate: Date?
     
+    fileprivate var cancelButtonTitle = NSLocalizedString("Cancel", comment: "")
+    fileprivate var doneButtonTitle = NSLocalizedString("Set", comment: "")
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,8 +86,8 @@ public class SBPickerSwiftSelector: UIViewController {
         datePickerView.backgroundColor = UIColor.white
         setupPicker()
         
-        cancelButton.title = NSLocalizedString("Cancel", comment: "")
-        doneButton.title = NSLocalizedString("Set", comment: "")
+        cancelButton.title = cancelButtonTitle
+        doneButton.title = doneButtonTitle
     }
     
     func setupPicker() {
@@ -186,8 +189,6 @@ public class SBPickerSwiftSelector: UIViewController {
         cancelAction = action
         return self
     }
-    
-    
 }
 
 extension SBPickerSwiftSelector: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -241,7 +242,7 @@ extension SBPickerSwiftSelector: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension SBPickerSwiftSelector {
-    public convenience init(mode: Mode, data: [Any]? = nil, startDate: Date? = nil, endDate: Date? = nil, defaultDate: Date? = nil) {
+    public convenience init(mode: Mode, data: [Any]? = nil, startDate: Date? = nil, endDate: Date? = nil, defaultDate: Date? = nil, doneTitle: String? = nil, cancelTitle: String? = nil) {
         self.init(nibName: "SBPickerSwiftSelector", bundle: Bundle.module)
         
         self.modalPresentationStyle = .overCurrentContext
@@ -259,6 +260,9 @@ extension SBPickerSwiftSelector {
         self.startDate = startDate
         self.endDate = endDate
         self.defaultDate = defaultDate
+        
+        self.doneButtonTitle = doneTitle ?? NSLocalizedString("Set", comment: "")
+        self.cancelButtonTitle = cancelTitle ?? NSLocalizedString("Cancel", comment: "")
     }
     
     public func present(into viewController: UIViewController) {
