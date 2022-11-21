@@ -8,7 +8,7 @@
 
 import UIKit
 
-@objcMembers
+@objc @objcMembers
 public class SBPickerSwiftSelector: UIViewController {
     public enum Mode: Int {
         case text, dateDefault, dateHour, dateDayMonthYear, dateMonthYear
@@ -259,6 +259,25 @@ extension SBPickerSwiftSelector {
         self.startDate = startDate
         self.endDate = endDate
         self.defaultDate = defaultDate
+        
+        self.doneButtonTitle = doneTitle ?? NSLocalizedString("Set", comment: "")
+        self.cancelButtonTitle = cancelTitle ?? NSLocalizedString("Cancel", comment: "")
+    }
+    
+    public convenience init(data: [Any]?, doneTitle: String? = nil, cancelTitle: String? = nil) {
+        self.init(nibName: "SBPickerSwiftSelector", bundle: Bundle.module)
+        
+        self.modalPresentationStyle = .overCurrentContext
+        self.pickerMode = .text
+        
+        if let data = data {
+            self.data = data
+            if data is [String] {
+                self.numberOfComponents = 1
+            } else {
+                self.numberOfComponents = data.count
+            }
+        }
         
         self.doneButtonTitle = doneTitle ?? NSLocalizedString("Set", comment: "")
         self.cancelButtonTitle = cancelTitle ?? NSLocalizedString("Cancel", comment: "")
