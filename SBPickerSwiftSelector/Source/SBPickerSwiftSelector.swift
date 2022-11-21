@@ -8,10 +8,9 @@
 
 import UIKit
 
+@objcMembers
 public class SBPickerSwiftSelector: UIViewController {
-    
-    
-    public enum Mode {
+    public enum Mode: Int {
         case text, dateDefault, dateHour, dateDayMonthYear, dateMonthYear
     }
 
