@@ -45,6 +45,7 @@ public class SBPickerSwiftSelector: UIViewController {
         
         if let locale = customLocale {
             formatter.locale = locale
+            datePickerView.locale = locale
         }
         
         monthList = formatter.monthSymbols
