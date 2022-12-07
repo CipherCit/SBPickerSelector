@@ -36,11 +36,17 @@ public class SBPickerSwiftSelector: UIViewController {
     
     fileprivate var cancelButtonTitle = NSLocalizedString("Cancel", comment: "")
     fileprivate var doneButtonTitle = NSLocalizedString("Set", comment: "")
+    private var customLocale: Locale?
     
     override public func viewDidLoad() {
         super.viewDidLoad()
         
         let formatter = DateFormatter()
+        
+        if let locale = customLocale {
+            formatter.locale = locale
+        }
+        
         monthList = formatter.monthSymbols
         //repeat the list
         monthList.append(contentsOf: formatter.monthSymbols)
@@ -129,6 +135,10 @@ public class SBPickerSwiftSelector: UIViewController {
         let yearDefault = calendar.component(.year, from: date)
         let month = months[monthDefault-1]
         
+        if let locale = customLocale {
+            formatter.locale = locale
+        }
+        
         let monthIndex = monthList.firstIndex(of: month)! + (months.count*2)
         pickerView.selectRow(monthIndex, inComponent: 0, animated: false)
         
@@ -186,6 +196,11 @@ public class SBPickerSwiftSelector: UIViewController {
     
     public func cancel(_ action: @escaping ()->()) -> SBPickerSwiftSelector {
         cancelAction = action
+        return self
+    }
+    
+    public func dateLocale(_ locale: Locale) -> SBPickerSwiftSelector {
+        self.customLocale = locale
         return self
     }
 }
