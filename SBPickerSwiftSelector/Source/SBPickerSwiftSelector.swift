@@ -38,6 +38,8 @@ public class SBPickerSwiftSelector: UIViewController {
     fileprivate var doneButtonTitle = NSLocalizedString("Set", comment: "")
     private var customLocale: Locale?
     
+    private var calendar: Calendar = .current
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
@@ -60,7 +62,6 @@ public class SBPickerSwiftSelector: UIViewController {
         var minYear = 1920
         var maxYear = 2050
         
-        let calendar = Calendar.current
         if let startDate = startDate {
             minYear = calendar.component(.year, from: startDate)
             datePickerView.minimumDate = startDate
@@ -129,7 +130,6 @@ public class SBPickerSwiftSelector: UIViewController {
             date = defaultDate
         }
         
-        let calendar = Calendar.current
         let formatter = DateFormatter()
         let months = formatter.monthSymbols!
         let monthDefault = calendar.component(.month, from: date)
@@ -257,7 +257,15 @@ extension SBPickerSwiftSelector: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension SBPickerSwiftSelector {
-    public convenience init(mode: Mode, data: [Any]? = nil, startDate: Date? = nil, endDate: Date? = nil, defaultDate: Date? = nil, doneTitle: String? = nil, cancelTitle: String? = nil) {
+    public convenience init(
+        mode: Mode,
+        data: [Any]? = nil,
+        startDate: Date? = nil,
+        endDate: Date? = nil,
+        defaultDate: Date? = nil,
+        doneTitle: String? = nil,
+        cancelTitle: String? = nil,
+        calendar: Calendar = .current) {
         self.init(nibName: "SBPickerSwiftSelector", bundle: Bundle.module)
         
         self.modalPresentationStyle = .overCurrentContext
@@ -278,6 +286,8 @@ extension SBPickerSwiftSelector {
         
         self.doneButtonTitle = doneTitle ?? NSLocalizedString("Set", comment: "")
         self.cancelButtonTitle = cancelTitle ?? NSLocalizedString("Cancel", comment: "")
+            
+        self.calendar = calendar
     }
     
     public convenience init(data: [Any]?, doneTitle: String? = nil, cancelTitle: String? = nil) {
