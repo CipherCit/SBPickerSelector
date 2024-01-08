@@ -50,6 +50,8 @@ public class SBPickerSwiftSelector: UIViewController {
             datePickerView.locale = locale
         }
         
+        datePickerView.calendar = calendar
+        
         monthList = formatter.monthSymbols
         //repeat the list
         monthList.append(contentsOf: formatter.monthSymbols)
